@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,14 +88,14 @@ public class UserServiceImpl implements UserService, UserProvider {
     }
 
     /**
-     * Finds and returns a list of users with an age greater than or equal to the specified minimum age.
+     * Finds and returns a list of users who are older than the specified date.
      *
-     * @param  minAge  the minimum age of the users to search for
-     * @return         a list of users with an age greater than or equal to the specified minimum age
+     * @param  date  the date to compare the users' birthdates against
+     * @return       a list of users who are older than the specified date
      */
     @Override
-    public List<User> findUsersByMinAge(int minAge) {
-        return userRepository.findAllByMinAge(minAge);
+    public List<User> findUsersOlderThan(LocalDate date) {
+        return userRepository.findAllByBirthdateBefore(date);
     }
 
     /**

@@ -4,6 +4,8 @@ import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,15 +38,14 @@ interface UserRepository extends JpaRepository<User, Long> {
     }
 
     /**
-     * Finds and returns a list of users with an age greater than or equal to the specified minimum age.
+     * Finds and returns a list of users who are older than the specified date.
      *
-     * @param  minAge  the minimum age of the users to search for
-     * @return        a list of users whose age is greater than or equal to the specified minimum age
+     * @param  date  the date to compare the users' birthdates against
+     * @return       a list of users who are older than the specified date
      */
-    default List<User> findAllByMinAge(int minAge) {
-        int currentYear = java.time.LocalDate.now().getYear();
+    default List<User> findAllByBirthdateBefore(LocalDate date) {
         return findAll().stream()
-                .filter(user -> currentYear - user.getBirthdate().getYear() >= minAge)
+                .filter(user -> user.getBirthdate().isBefore(date))
                 .toList();
     }
 }

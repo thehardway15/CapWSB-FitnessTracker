@@ -2,12 +2,15 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+
 
 @RestController
 @RequestMapping("/v1/users")
@@ -19,12 +22,25 @@ class UserController {
     private final UserMapper userMapper;
 
     /**
+     * Retrieves all users from the user service and maps them to a list of UserDto objects.
+     *
+     * @return  a list of UserDto objects representing all users
+     */
+    @GetMapping
+    public List<UserDto> getAllUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    /**
      * Retrieves all users from the user service and maps them to a list of UserSimpleDto objects.
      *
      * @return  a list of UserSimpleDto objects representing all users
      */
-    @GetMapping
-    public List<UserSimpleDto> getAllUsers() {
+    @GetMapping("/simple")
+    public List<UserSimpleDto> getAllUsersSimple() {
         return userService.findAllUsers()
                           .stream()
                           .map(userMapper::toSimpleDto)
@@ -51,6 +67,7 @@ class UserController {
      * @return          the created user object
      */
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         // Demonstracja how to use @RequestBody
@@ -77,25 +94,26 @@ class UserController {
      * @param  email  the email address to search for in user emails
      * @return        a list of UserEmailDto objects representing the users with the specified email
      */
-    @GetMapping("/email/{email}")
-    public List<UserEmailDto> getUsersByEmail(@PathVariable String email) {
+    @GetMapping("/email")
+    public List<UserEmailDto> getUsersByEmail(@RequestParam String email) {
         return userService.findUsersByEmail(email)
                           .stream()
                           .map(userMapper::toEmailDto)
                           .toList();
     }
 
+
     /**
-     * Retrieves users with an age greater than or equal to the specified minimum age from the user service and maps them to a list of UserSimpleDto objects.
+     * Retrieves a list of users who are older than the specified date.
      *
-     * @param  minAge  the minimum age of the users to search for
-     * @return         a list of UserSimpleDto objects representing the users with an age greater than or equal to the specified minimum age
+     * @param  time  the date in the format "yyyy-MM-dd" to compare the users' birthdates against
+     * @return       a list of UserDto objects representing the users who are older than the specified date
      */
-    @GetMapping("/minAge/{minAge}")
-    public List<UserSimpleDto> getUsersByMinAge(@PathVariable int minAge) {
-        return userService.findUsersByMinAge(minAge)
+    @GetMapping("/older/{time}")
+    public List<UserDto> getUserOlderThan(@PathVariable("time") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        return userService.findUsersOlderThan(date)
                           .stream()
-                          .map(userMapper::toSimpleDto)
+                          .map(userMapper::toDto)
                           .toList();
     }
 
@@ -106,7 +124,7 @@ class UserController {
      * @param  userDto  the updated user data, passed in the request body
      * @return          the updated user object
      */
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
         userService.getUser(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with id " + id + " not found"));
         return userService.updateUser(userMapper.toEntityWithId(userDto, id));

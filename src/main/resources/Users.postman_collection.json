@@ -186,7 +186,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "0.0.0.0:8080/v1/users/email/iv",
+					"raw": "0.0.0.0:8080/v1/users/email?email=iv",
 					"host": [
 						"0",
 						"0",
@@ -197,15 +197,20 @@
 					"path": [
 						"v1",
 						"users",
-						"email",
-						"iv"
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "iv"
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Search by min age",
+			"name": "Search older than",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -225,7 +230,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "0.0.0.0:8080/v1/users/minAge/40",
+					"raw": "0.0.0.0:8080/v1/users/older/1990-10-10",
 					"host": [
 						"0",
 						"0",
@@ -236,8 +241,8 @@
 					"path": [
 						"v1",
 						"users",
-						"minAge",
-						"40"
+						"older",
+						"1990-10-10"
 					]
 				}
 			},
@@ -261,7 +266,7 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -285,6 +290,44 @@
 						"v1",
 						"users",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users list simple",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/users/simple",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"simple"
 					]
 				}
 			},

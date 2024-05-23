@@ -14,7 +14,9 @@ public class LoggingAspect {
         System.out.println("Before method: " + proceedingJoinPoint.getSignature());
         Object proceed = proceedingJoinPoint.proceed();
         System.out.println("After method: " + proceedingJoinPoint.getSignature());
-        System.out.println("After return: " + proceed.toString());
+        if (proceed != null) {
+            System.out.println("After return: " + proceed.toString());
+        }
         return proceed;
 
     }
