@@ -51,7 +51,7 @@ class UserController {
      * @return          the created user object
      */
     @PostMapping
-    public User addUser(@RequestBody UserDto userDto) {
+    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");

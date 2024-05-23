@@ -31,9 +31,6 @@ Stworzone API powinno pozwalać na:
   znaleźć można w `UserRepository`
 - [ ] rozwiązanie powinno spełniać zasady SOLID
 - [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
-- [ ] OPCJONALNE rozwiązanie powinno implementować logikę potrzebną do spełnienia już
-  istniejących [testów integracyjnych API]
-  . NIE należy zmieniać logiki tych testów.
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować

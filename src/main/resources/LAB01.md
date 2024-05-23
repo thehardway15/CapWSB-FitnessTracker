@@ -4,14 +4,16 @@ Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w pr
 
 ## ZADANIE 0
 - Konfiguracja środowiska, wdrożenie do projektu.
-- Konfiguracja prywatnego repozytorium (udostępnienie dostępu prowadzącemu do prywatnego repozytorium z projektem (link) i bieżącym postępem). 
+- Konfiguracja prywatnego repozytorium (udostępnienie dostępu prowadzącemu do
+- prywatnego repozytorium z projektem (link) i bieżącym postępem).
 - Hosting: Rekomendacja Github.com
 
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
 ### Potrzeba biznesowa
 
-Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami serwisu FitnessTracker:
+Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami
+serwisu FitnessTracker:
 
 - móc ich wyszukiwać, pobierać
 - móc wprowadzać nowych użytkowników do systemu
@@ -41,10 +43,7 @@ Stworzone API powinno pozwalać na:
   domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
   znaleźć można w `UserRepository`
 - [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
-- [ ] OPCJONALNE rozwiązanie powinno implementować logikę potrzebną do spełnienia już
-  istniejących [testów integracyjnych API]
-  . NIE należy zmieniać logiki tych testów.
+- [ ] (OPCJONALNIE) rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
