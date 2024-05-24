@@ -22,6 +22,7 @@ class TrainingMapper {
 
     TrainingWithoutUserDto toDtoWithoutUser(Training training) {
         return new TrainingWithoutUserDto(training.getId(),
+                               training.getUser().getId(),
                                training.getStartTime(),
                                training.getEndTime(),
                                training.getActivityType(),

@@ -64,7 +64,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "0.0.0.0:8080/v1/trainings/getByUser/1",
+					"raw": "0.0.0.0:8080/v1/trainings/1",
 					"host": [
 						"0",
 						"0",
@@ -75,7 +75,6 @@
 					"path": [
 						"v1",
 						"trainings",
-						"getByUser",
 						"1"
 					]
 				}
@@ -103,7 +102,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "0.0.0.0:8080/v1/trainings/endAfter/2024-01-15",
+					"raw": "0.0.0.0:8080/v1/trainings/finished/2024-01-15",
 					"host": [
 						"0",
 						"0",
@@ -114,7 +113,7 @@
 					"path": [
 						"v1",
 						"trainings",
-						"endAfter",
+						"finished",
 						"2024-01-15"
 					]
 				}
@@ -142,7 +141,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "0.0.0.0:8080/v1/trainings/byType/RUNNING",
+					"raw": "0.0.0.0:8080/v1/trainings/activityType?activityType=RUNNING",
 					"host": [
 						"0",
 						"0",
@@ -153,8 +152,13 @@
 					"path": [
 						"v1",
 						"trainings",
-						"byType",
-						"RUNNING"
+						"activityType"
+					],
+					"query": [
+						{
+							"key": "activityType",
+							"value": "RUNNING"
+						}
 					]
 				}
 			},
@@ -178,7 +182,7 @@
 						}
 					]
 				},
-				"method": "POST",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -229,7 +233,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"startTime\": \"2024-01-19T07:00:00.000+00:00\",\n        \"endTime\": \"2024-01-19T08:30:00.000+00:00\",\n        \"activityType\": \"RUNNING\",\n        \"distance\": 100.5,\n        \"averageSpeed\": 80.2\n    }",
+					"raw": "{\n        \"userId\": 1,\n        \"startTime\": \"2024-01-19T07:00:00.000+00:00\",\n        \"endTime\": \"2024-01-19T08:30:00.000+00:00\",\n        \"activityType\": \"RUNNING\",\n        \"distance\": 100.5,\n        \"averageSpeed\": 80.2\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -237,7 +241,7 @@
 					}
 				},
 				"url": {
-					"raw": "0.0.0.0:8080/v1/trainings/user/1",
+					"raw": "0.0.0.0:8080/v1/trainings",
 					"host": [
 						"0",
 						"0",
@@ -247,9 +251,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"trainings",
-						"user",
-						"1"
+						"trainings"
 					]
 				}
 			},

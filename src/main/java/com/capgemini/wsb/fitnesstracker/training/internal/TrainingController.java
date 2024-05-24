@@ -43,7 +43,7 @@ class TrainingController {
      * @param  userId  the ID of the user
      * @return         a list of TrainingDto objects representing the trainings associated with the user
      */
-    @GetMapping("/getByUser/{userId}")
+    @GetMapping("/{userId}")
     public List<TrainingDto> getTrainingsByUser(@PathVariable Long userId) {
         return trainingService.getTrainingsByUser(userId)
                               .stream()
@@ -57,7 +57,7 @@ class TrainingController {
      * @param  date  the date to compare against the end time of trainings
      * @return       a list of trainings that end after the specified date
      */
-    @GetMapping("/endAfter/{date}")
+    @GetMapping("/finished/{date}")
     public List<TrainingDto> getTrainingsEndingAfter(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return trainingService.getTrainingsEndingAfter(date)
                               .stream()
@@ -68,13 +68,13 @@ class TrainingController {
     /**
      * Retrieves a list of TrainingDto objects based on the specified activity type.
      *
-     * @param  type  the activity type to filter the trainings by
+     * @param  activityType  the activity type to filter the trainings by
      * @return       a list of TrainingDto objects matching the specified activity type
      */
-    @GetMapping("/byType/{type}")
-    public List<TrainingDto> getTrainingsByType(@PathVariable("type") String type) {
-        ActivityType activityType = ActivityType.valueOf(type);
-        return trainingService.getTrainingsByType(activityType)
+    @GetMapping("/activityType")
+    public List<TrainingDto> getTrainingsByType(@RequestParam String activityType) {
+        ActivityType aType = ActivityType.valueOf(activityType);
+        return trainingService.getTrainingsByType(aType)
                               .stream()
                               .map(trainingMapper::toDto)
                               .toList();
@@ -83,13 +83,13 @@ class TrainingController {
     /**
      * Creates a new training entity for a specific user.
      *
-     * @param  userId         the ID of the user for whom the training is created
      * @param  trainingDto    the TrainingWithoutUserDto object containing training details
      * @return                the created TrainingDto object
      */
-    @PostMapping("/user/{userId}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TrainingDto createTraining(@PathVariable Long userId, @RequestBody TrainingWithoutUserDto trainingDto) {
+    public TrainingDto createTraining(@RequestBody TrainingWithoutUserDto trainingDto) {
+        long userId = trainingDto.userId();
         User user = userService.getUser(userId)
                                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Training training = trainingService.createTraining(trainingMapper.toTraining(trainingDto, user, null));
@@ -103,7 +103,7 @@ class TrainingController {
      * @param  trainingDto the TrainingWithoutUserDto object containing the updated training details
      * @return             the updated TrainingDto object
      */
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public TrainingDto updateTraining(@PathVariable Long id, @RequestBody TrainingWithoutUserDto trainingDto) {
         Training originalTraining = trainingService.getById(id)
