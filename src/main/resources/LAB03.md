@@ -7,9 +7,9 @@ tygodniu.
 
 ### Wymagania funkcjonalne
 
-- [ ] w oparciu o ustalony zdefiniowany czas (co tydzień) generowany jest raport z treningami dla każdego użytkownika z
+- [x] w oparciu o ustalony zdefiniowany czas (co tydzień) generowany jest raport z treningami dla każdego użytkownika z
   danego tygodnia
-- [ ] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych łącznie
+- [x] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych łącznie
 
 
 ## ZADANIE 2. Programowanie aspektowe (opcjonalnie, proszę zerknąć w Lab branch (livecoding pakiet)
@@ -20,11 +20,11 @@ Jako pracownik utrzymania, chcę mieć możliwość kontroli wykonania się kodu
 
 ### Wymagania funkcjonalne
 
-- [ ] być uruchomiony podczas wywoływania metod publicznych serwisów (klas adnotowanych `@Service`)
-- [ ] przed wywołaniem metody logować o niej informację w
+- [x] być uruchomiony podczas wywoływania metod publicznych serwisów (klas adnotowanych `@Service`)
+- [x] przed wywołaniem metody logować o niej informację w
   formacie (`typ zwracany nazwaKlasy.nazwaMetody(typParametru1 nazwaParametru1, ...)`),
   np. `void MyService.myMethod(String param1, Boolean param2)`
-- [ ] po wywołaniu metody logować informację o metodzie (w tym samym formacie co przed wywołaniem) wraz z informacją na
+- [x] po wywołaniu metody logować informację o metodzie (w tym samym formacie co przed wywołaniem) wraz z informacją na
   temat zwróconej wartości (wystarczy jej toString())
 
 ### Wymagania techniczne
